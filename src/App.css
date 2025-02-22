@@ -1,3 +1,7 @@
+body {
+  background-color: #f0b27a;
+}
+
 .game {
   text-align: center;
   padding: 20px;
@@ -14,15 +18,16 @@
 
 .cell {
   font-size: 2rem;
-  background: white;
+  background: #fae5d3;
   border: 2px solid #ccc;
   cursor: pointer;
   transition: background 0.3s;
+  color: #d35400;
 }
 
 .cell:disabled {
-  background: #f0f0f0;
-  cursor: not-allowed;
+  background: #fadbd8;
+  cursor: default;
 }
 
 .status {
@@ -33,13 +38,13 @@
 .reset-button {
   padding: 10px 20px;
   font-size: 1rem;
-  background: #007bff;
-  color: white;
+  background: #a04000;
+  color: #fae5d3;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .reset-button:hover {
-  background: #0056b3;
+  background: #af601a;
 }
