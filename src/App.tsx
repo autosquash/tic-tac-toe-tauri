@@ -1,49 +1,76 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import { invoke } from '@tauri-apps/api/core'
 import './App.css'
 
-function App() {
-  const [greetMsg, setGreetMsg] = useState('')
-  const [name, setName] = useState('')
+type Player = 'X' | 'O' | ''
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke('greet', { name }))
+function App() {
+  const [board, setBoard] = useState<string[]>(Array(9).fill(''))
+  const [currentPlayer, setCurrentPlayer] = useState<Player>('X')
+  const [gameOver, setGameOver] = useState(false)
+  const [status, setStatus] = useState('Turno del jugador X')
+
+  // Check game state with the backend
+  const checkGameState = async (currentBoard: string[]) => {
+    try {
+      const result = await invoke<string>('check_game_state', {
+        board: currentBoard,
+      })
+
+      if (result === 'X' || result === 'O') {
+        setStatus(`¡Ganó el jugador ${result}!`)
+        setGameOver(true)
+      } else if (result === 'draw') {
+        setStatus('¡Empate!')
+        setGameOver(true)
+      } else {
+        const newPlayer = currentPlayer === 'X' ? 'O' : 'X'
+        setCurrentPlayer(newPlayer)
+        setStatus(`Turno del jugador ${newPlayer}`)
+      }
+    } catch (error) {
+      console.error('Error al verificar el estado:', error)
+    }
   }
 
-  return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+  const handleCellClick = async (index: number) => {
+    if (gameOver || board[index] !== '') return
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault()
-          greet()
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+    const newBoard = [...board]
+    newBoard[index] = currentPlayer
+    setBoard(newBoard)
+
+    await checkGameState(newBoard)
+  }
+
+  const resetGame = () => {
+    setBoard(Array(9).fill(''))
+    setCurrentPlayer('X')
+    setGameOver(false)
+    setStatus('Turno del jugador X')
+  }
+
+  // Render individual cell
+  const renderCell = (index: number) => (
+    <button
+      key={index}
+      className="cell"
+      onClick={() => handleCellClick(index)}
+      disabled={gameOver || board[index] !== ''}
+    >
+      {board[index]}
+    </button>
+  )
+
+  return (
+    <div className="game">
+      <h1>Tres en raya</h1>
+      <p className="status">{status}</p>
+      <div className="board">{board.map((_, index) => renderCell(index))}</div>
+      <button className="reset-button" onClick={resetGame}>
+        Reiniciar
+      </button>
+    </div>
   )
 }
 
