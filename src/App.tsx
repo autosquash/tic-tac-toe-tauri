@@ -67,11 +67,13 @@ function App() {
       <h1>Tres en raya</h1>
       <div className="flex">
         <div className="gui">
-          <p className="status">{status}</p>
-          <div>
-            <button className="reset-button" onClick={resetGame}>
-              Reiniciar
-            </button>
+          <div className="frame">
+            <p className="status">{status}</p>
+            <div>
+              <button className="reset-button" onClick={resetGame}>
+                Reiniciar
+              </button>
+            </div>
           </div>
         </div>
         <div className="board">
