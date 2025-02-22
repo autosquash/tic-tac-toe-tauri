@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import './App.css'
 
 type Player = 'X' | 'O' | ''
 
 function App() {
+  const audioRef = useRef<HTMLAudioElement>(null)
+
   const [board, setBoard] = useState<string[]>(Array(9).fill(''))
   const [currentPlayer, setCurrentPlayer] = useState<Player>('X')
   const [gameOver, setGameOver] = useState(false)
@@ -34,8 +36,13 @@ function App() {
   }
 
   const handleCellClick = async (index: number) => {
-    if (gameOver || board[index] !== '') return
-
+    if (gameOver || board[index] !== '') {
+      return
+    }
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0.15
+      audioRef.current.play()
+    }
     const newBoard = [...board]
     newBoard[index] = currentPlayer
     setBoard(newBoard)
@@ -73,6 +80,7 @@ function App() {
               <button className="reset-button" onClick={resetGame}>
                 Reiniciar
               </button>
+              <audio ref={audioRef} src="/public/tap.mp3" />
             </div>
           </div>
         </div>
