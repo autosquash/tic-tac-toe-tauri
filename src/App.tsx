@@ -11,7 +11,7 @@ function App() {
   const [status, setStatus] = useState('Turno del jugador X')
 
   // Check game state with the backend
-  const checkGameState = async (currentBoard: string[]) => {
+  const checkGameState = async (currentBoard: readonly string[]) => {
     try {
       const result = await invoke<string>('check_game_state', {
         board: currentBoard,
