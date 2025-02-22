@@ -65,11 +65,19 @@ function App() {
   return (
     <div className="game">
       <h1>Tres en raya</h1>
-      <p className="status">{status}</p>
-      <div className="board">{board.map((_, index) => renderCell(index))}</div>
-      <button className="reset-button" onClick={resetGame}>
-        Reiniciar
-      </button>
+      <div className="flex">
+        <div className="gui">
+          <p className="status">{status}</p>
+          <div>
+            <button className="reset-button" onClick={resetGame}>
+              Reiniciar
+            </button>
+          </div>
+        </div>
+        <div className="board">
+          {board.map((_, index) => renderCell(index))}
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,10 +1,35 @@
 body {
   background-color: #f0b27a;
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .game {
-  text-align: center;
+  box-sizing: border-box;
   padding: 20px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.gui {
+  min-width: 45%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: center;
+  min-height: 40vh;
 }
 
 .board {
@@ -12,7 +37,6 @@ body {
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
   gap: 5px;
-  margin: 20px auto;
   justify-content: center;
 }
 
