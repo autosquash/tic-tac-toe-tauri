@@ -6,7 +6,11 @@ import Gui from './Gui'
 
 type Player = 'X' | 'O' | ''
 
-function TicTacToe() {
+interface Props {
+  exit: () => void
+}
+
+function TicTacToe({ exit }: Props) {
   const { audioRef, tryTap } = useAudio()
 
   const [board, setBoard] = useState<string[]>(Array(9).fill(''))
@@ -73,7 +77,7 @@ function TicTacToe() {
       <audio ref={audioRef} src="/tap.mp3" preload="auto" />
       <h1>Tres en raya</h1>
       <div className="flex">
-        <Gui status={status} resetGame={resetGame} />
+        <Gui status={status} resetGame={resetGame} exit={exit} />
         <div className="board">
           {board.map((_, index) => renderCell(index))}
         </div>
