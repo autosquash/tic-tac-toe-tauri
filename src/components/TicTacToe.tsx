@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import './TicTacToe.css'
 import useAudio from '../hooks/useAudio'
+import Gui from './Gui'
 
 type Player = 'X' | 'O' | ''
 
@@ -72,16 +73,7 @@ function TicTacToe() {
       <audio ref={audioRef} src="/tap.mp3" preload="auto" />
       <h1>Tres en raya</h1>
       <div className="flex">
-        <div className="gui">
-          <div className="frame">
-            <p className="status">{status}</p>
-            <div>
-              <button className="reset-button" onClick={resetGame}>
-                Reiniciar
-              </button>
-            </div>
-          </div>
-        </div>
+        <Gui status={status} resetGame={resetGame} />
         <div className="board">
           {board.map((_, index) => renderCell(index))}
         </div>
