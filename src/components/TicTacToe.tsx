@@ -69,6 +69,7 @@ function TicTacToe() {
 
   return (
     <div className="game">
+      <audio ref={audioRef} src="/tap.mp3" preload="auto" />
       <h1>Tres en raya</h1>
       <div className="flex">
         <div className="gui">
@@ -78,7 +79,6 @@ function TicTacToe() {
               <button className="reset-button" onClick={resetGame}>
                 Reiniciar
               </button>
-              <audio ref={audioRef} src="/tap.mp3" preload="auto" />
             </div>
           </div>
         </div>
