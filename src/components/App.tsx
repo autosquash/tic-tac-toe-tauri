@@ -80,7 +80,7 @@ function App() {
               <button className="reset-button" onClick={resetGame}>
                 Reiniciar
               </button>
-              <audio ref={audioRef} src="/public/tap.mp3" />
+              <audio ref={audioRef} src="/tap.mp3" preload="auto" />
             </div>
           </div>
         </div>
