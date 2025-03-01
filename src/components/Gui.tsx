@@ -11,7 +11,7 @@ export default function Gui({ status, resetGame }: Readonly<GuiProps>) {
       <div className="frame">
         <p className="status">{status}</p>
         <div>
-          <button className="reset-button" onClick={resetGame}>
+          <button className="base-button" onClick={resetGame}>
             Reiniciar
           </button>
         </div>

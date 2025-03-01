@@ -11,7 +11,7 @@ body {
   text-align: center;
 }
 
-.start-game-button {
+.base-button {
   padding: 10px 20px;
   font-size: 1rem;
   background: #a04000;
@@ -19,4 +19,12 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.base-button:hover {
+  background: #af601a;
+}
+
+.base-button:active {
+  background: #ca6f1e;
 }

@@ -9,10 +9,7 @@ function App() {
     <TicTacToe />
   ) : (
     <div>
-      <button
-        className="start-game-button"
-        onClick={() => setGameStarted(true)}
-      >
+      <button className="base-button" onClick={() => setGameStarted(true)}>
         Empezar
       </button>
     </div>
