@@ -1,0 +1,78 @@
+.game {
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.gui {
+    min-width: 45%;
+    align-self: center;
+    min-height: 40vh;
+    /* background-color: gray; */
+    display: flex;
+    justify-content: end;
+}
+
+.frame {
+    margin-right: 24px;
+    border: 4px solid black;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fae5d3;
+    flex-grow: 1;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    justify-content: center;
+}
+
+.cell {
+    font-size: 2rem;
+    background: #fae5d3;
+    border: 4px solid #e67e22;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.5s, color 0.5s;
+    color: #fadbd8;
+}
+
+.cell:disabled {
+    background: #fadbd8;
+    color: #d35400;
+    cursor: default;
+}
+
+.status {
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+.reset-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #a04000;
+    color: #fae5d3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background: #af601a;
+}
+
+.reset-button:active {
+    background: #ca6f1e;
+}
