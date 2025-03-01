@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { invoke } from '@tauri-apps/api/core'
 import './App.css'
+import useAudio from '../hooks/useAudio'
 
 type Player = 'X' | 'O' | ''
 
 function App() {
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const { audioRef, tryTap } = useAudio()
 
   const [board, setBoard] = useState<string[]>(Array(9).fill(''))
   const [currentPlayer, setCurrentPlayer] = useState<Player>('X')
@@ -39,10 +40,7 @@ function App() {
     if (gameOver || board[index] !== '') {
       return
     }
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0.15
-      audioRef.current.play()
-    }
+    tryTap()
     const newBoard = [...board]
     newBoard[index] = currentPlayer
     setBoard(newBoard)
