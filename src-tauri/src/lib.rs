@@ -20,8 +20,24 @@ struct GameState {
     board: Vec<String>,
 }
 
+enum GameStatus {
+    Continue,
+    Draw,
+    O,
+    X,
+}
+
 #[tauri::command]
 fn check_game_state(board: Vec<String>) -> String {
+    match (get_game_status(board)) {
+        GameStatus::Continue => "Continue".to_string(),
+        GameStatus::Draw => "Draw".to_string(),
+        GameStatus::O => "O".to_string(),
+        GameStatus::X => "X".to_string(),
+    }
+}
+
+fn get_game_status(board: Vec<String>) -> GameStatus {
     // Check if there is a winner
 
     for combination in WINNING_COMBINATIONS.iter() {
@@ -30,17 +46,25 @@ fn check_game_state(board: Vec<String>) -> String {
         let c = &board[combination[2]];
 
         if a != "" && a == b && b == c {
-            return a.to_string(); // Returns the winner (X or O)
+            // Returns the winner (X or O)
+            let s = a.to_string();
+            if s == "O" {
+                return GameStatus::O;
+            }
+            if s == "X" {
+                return GameStatus::X;
+            }
+            panic!()
         }
     }
 
     // Check if there is a tie
     if board.iter().all(|cell| cell != "") {
-        return "draw".to_string();
+        return GameStatus::Draw;
     }
 
     // If there is no winner or tie, return "continue"
-    "continue".to_string()
+    GameStatus::Continue
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
