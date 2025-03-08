@@ -1,3 +1,5 @@
+use core::panic;
+
 pub enum GameStatus {
     Continue,
     Draw,
@@ -29,14 +31,11 @@ pub fn get_game_status(board: Vec<String>) -> GameStatus {
 
         if a != "" && a == b && b == c {
             // Returns the winner (X or O)
-            let s = a.to_string();
-            if s == "O" {
-                return GameStatus::O;
-            }
-            if s == "X" {
-                return GameStatus::X;
-            }
-            panic!()
+            return match a.as_str() {
+                "O" => GameStatus::O,
+                "X" => GameStatus::X,
+                _ => panic!(),
+            };
         }
     }
 
