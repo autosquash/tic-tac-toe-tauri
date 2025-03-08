@@ -1,6 +1,19 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 // src-tauri/src/main.rs
 use serde::{Deserialize, Serialize};
+const WINNING_COMBINATIONS: [[usize; 3]; 8] = [
+    // Rows
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    // Columns
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    // Diagonals
+    [0, 4, 8],
+    [2, 4, 6],
+];
 
 #[derive(Serialize, Deserialize)]
 struct GameState {
@@ -10,21 +23,8 @@ struct GameState {
 #[tauri::command]
 fn check_game_state(board: Vec<String>) -> String {
     // Check if there is a winner
-    let winning_combinations = [
-        // Rows
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        // Columns
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        // Diagonals
-        [0, 4, 8],
-        [2, 4, 6],
-    ];
 
-    for combination in winning_combinations.iter() {
+    for combination in WINNING_COMBINATIONS.iter() {
         let a = &board[combination[0]];
         let b = &board[combination[1]];
         let c = &board[combination[2]];
