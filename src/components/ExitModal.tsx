@@ -1,4 +1,4 @@
-import './ExitModal.css'
+import styles from './ExitModal.module.css'
 
 interface ExitModalProps {
   isOpen: boolean
@@ -14,18 +14,24 @@ const ExitModal = ({
   if (!isOpen) return null
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className={styles.modalOverlay}>
+      <div className={styles.modal}>
         <h2>¿Salir del juego?</h2>
         <p>
           Por favor, confirma si quieres salir del juego. La partida actual se
           descartará.
         </p>
-        <div className="modal-buttons">
-          <button className="btn cancel" onClick={onClose}>
+        <div className={styles.modalButtons}>
+          <button
+            className={`${styles.btn} ${styles.cancel}`}
+            onClick={onClose}
+          >
             Cancelar
           </button>
-          <button className="btn confirm" onClick={onConfirm}>
+          <button
+            className={`${styles.btn} ${styles.confirm}`}
+            onClick={onConfirm}
+          >
             Salir
           </button>
         </div>

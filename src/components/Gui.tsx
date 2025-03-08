@@ -1,4 +1,5 @@
-import './Gui.css'
+import styles from './Gui.module.css'
+import appStyles from './App.module.css'
 
 interface GuiProps {
   status: string
@@ -8,15 +9,15 @@ interface GuiProps {
 
 export default function Gui({ status, resetGame, exit }: Readonly<GuiProps>) {
   return (
-    <div className="gui">
-      <div className="frame">
-        <p className="status">{status}</p>
-        <div className="flex">
-          <button className="base-button" onClick={resetGame}>
+    <div className={styles.gui}>
+      <div className={styles.frame}>
+        <p className={styles.status}>{status}</p>
+        <div className={appStyles.flex}>
+          <button className={appStyles.baseButton} onClick={resetGame}>
             Reiniciar
           </button>
-          <span className="sep" />
-          <button className="base-button" onClick={exit}>
+          <span className={styles.sep} />
+          <button className={appStyles.baseButton} onClick={exit}>
             Salir
           </button>
         </div>

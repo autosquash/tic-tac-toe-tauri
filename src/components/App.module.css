@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-#root {
+:global(#root) {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,4 +27,10 @@ body {
 
 .base-button:active {
   background: #ca6f1e;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  padding: 20px;
 }

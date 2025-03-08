@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './App.css'
+import styles from './App.module.css'
 import TicTacToe from './TicTacToe'
 import ExitModal from './ExitModal'
 
@@ -7,7 +7,6 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  console.log({ isModalOpen })
 
   const handleExit = () => {
     setIsModalOpen(false)
@@ -26,7 +25,10 @@ function App() {
       ) : (
         <div>
           <h2>Juego del 3 en raya</h2>
-          <button className="base-button" onClick={() => setGameStarted(true)}>
+          <button
+            className={styles.baseButton}
+            onClick={() => setGameStarted(true)}
+          >
             Empezar
           </button>
         </div>

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { invoke } from '@tauri-apps/api/core'
-import './TicTacToe.css'
+import styles from './TicTacToe.module.css'
 import useAudio from '../hooks/useAudio'
 import Gui from './Gui'
+import appStyles from './App.module.css'
 
 type Player = 'X' | 'O' | ''
 
@@ -64,7 +65,7 @@ function TicTacToe({ exit }: Props) {
   const renderCell = (index: number) => (
     <button
       key={index}
-      className="cell"
+      className={styles.cell}
       onClick={() => handleCellClick(index)}
       disabled={gameOver || board[index] !== ''}
     >
@@ -73,12 +74,12 @@ function TicTacToe({ exit }: Props) {
   )
 
   return (
-    <div className="game">
+    <div className={styles.game}>
       <audio ref={audioRef} src="/tap.mp3" preload="auto" />
       <h1>Tres en raya</h1>
-      <div className="flex">
+      <div className={appStyles.flex}>
         <Gui status={status} resetGame={resetGame} exit={exit} />
-        <div className="board">
+        <div className={styles.board}>
           {board.map((_, index) => renderCell(index))}
         </div>
       </div>
