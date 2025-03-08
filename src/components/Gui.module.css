@@ -24,6 +24,11 @@
     margin: 20px 0;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
 .sep {
     width: 1em;
 }

@@ -12,7 +12,7 @@ export default function Gui({ status, resetGame, exit }: Readonly<GuiProps>) {
     <div className={styles.gui}>
       <div className={styles.frame}>
         <p className={styles.status}>{status}</p>
-        <div className={appStyles.flex}>
+        <div className={styles.buttonContainer}>
           <button className={appStyles.baseButton} onClick={resetGame}>
             Reiniciar
           </button>
