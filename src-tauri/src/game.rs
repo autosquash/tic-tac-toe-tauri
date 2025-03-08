@@ -39,11 +39,14 @@ pub fn get_game_status(board: Vec<String>) -> GameStatus {
         }
     }
 
-    // Check if there is a tie
-    if board.iter().all(|cell| cell != "") {
+    if is_a_draw(board) {
         return GameStatus::Draw;
     }
 
     // If there is no winner or tie, return "continue"
     GameStatus::Continue
+}
+
+pub fn is_a_draw(board: Vec<String>) -> bool {
+    board.iter().all(|cell| cell != "")
 }
